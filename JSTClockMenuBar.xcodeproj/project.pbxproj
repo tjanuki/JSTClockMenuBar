@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E33065222DE8F50F00307259 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33065212DE8F50F00307259 /* Info.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E33065052DE8F4A700307259 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		E33064F62DE8F4A600307259 /* JSTClockMenuBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSTClockMenuBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E33065042DE8F4A700307259 /* JSTClockMenuBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSTClockMenuBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E330650E2DE8F4A700307259 /* JSTClockMenuBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSTClockMenuBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E33065212DE8F50F00307259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		E33064ED2DE8F4A600307259 = {
 			isa = PBXGroup;
 			children = (
+				E33065212DE8F50F00307259 /* Info.plist */,
 				E33064F82DE8F4A600307259 /* JSTClockMenuBar */,
 				E33065072DE8F4A700307259 /* JSTClockMenuBarTests */,
 				E33065112DE8F4A700307259 /* JSTClockMenuBarUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E33065222DE8F50F00307259 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +414,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.tjanuki.JSTClockMenuBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,6 +442,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.tjanuki.JSTClockMenuBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
