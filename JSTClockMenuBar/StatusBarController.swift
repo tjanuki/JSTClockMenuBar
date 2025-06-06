@@ -1,11 +1,12 @@
 import Cocoa
 import SwiftUI
+import Combine
 
 class StatusBarController: NSObject {
     private var statusItem: NSStatusItem?
     private var popover: NSPopover?
     private var eventMonitor: EventMonitor?
-    private var clockView: ClockView?
+    private var cancellables = Set<AnyCancellable>()
     
     @ObservedObject private var clockManager = ClockManager()
     
@@ -20,24 +21,51 @@ class StatusBarController: NSObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let button = statusItem?.button {
-            // Create the clock view
-            clockView = ClockView(clockManager: clockManager)
-            let hostingView = NSHostingView(rootView: clockView)
-            hostingView.frame = NSRect(x: 0, y: 0, width: 50, height: 30)
-            
-            // Add to button
-            button.addSubview(hostingView)
-            button.frame = hostingView.frame
-            
             // Set action for click
             button.action = #selector(togglePopover)
             button.target = self
+            
+            // Update the title when clock updates
+            clockManager.$dateString.combineLatest(clockManager.$timeString)
+                .sink { [weak self] date, time in
+                    self?.updateStatusItemTitle(date: date, time: time)
+                }
+                .store(in: &cancellables)
         }
+    }
+    
+    private func updateStatusItemTitle(date: String, time: String) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+//       paragraphStyle.lineSpacing = -20  // Tighter line spacing
+//        paragraphStyle.paragraphSpacingBefore = 0
+//        paragraphStyle.paragraphSpacing = 0
+        
+        let dateAttributes: [NSAttributedString.Key: Any] = [
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 9, weight: .regular),
+            .paragraphStyle: paragraphStyle,
+//            .baselineOffset: -25  // Move date down less
+            .baselineOffset: -25  // Move date down less
+        ]
+        
+        let timeAttributes: [NSAttributedString.Key: Any] = [
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular),
+            .paragraphStyle: paragraphStyle,
+//            .baselineOffset: -8  // Move time up more
+        ]
+        
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: date + "\n", attributes: dateAttributes))
+//        attributedString.append(NSAttributedString(string: date, attributes: dateAttributes))
+        attributedString.append(NSAttributedString(string: time, attributes: timeAttributes))
+        
+        statusItem?.button?.attributedTitle = attributedString
     }
     
     private func setupPopover() {
         popover = NSPopover()
-        popover?.contentSize = NSSize(width: 250, height: 200)
+//        popover?.contentSize = NSSize(width: 250, height: 200)
+        popover?.contentSize = NSSize(width: 250, height: 50)
         popover?.behavior = .transient
         popover?.contentViewController = NSHostingController(
             rootView: PopoverView(clockManager: clockManager)
