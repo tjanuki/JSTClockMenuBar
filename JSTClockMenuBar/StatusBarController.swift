@@ -43,15 +43,15 @@ class StatusBarController: NSObject {
         paragraphStyle.maximumLineHeight = 12
         
         let dateAttributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.monospacedDigitSystemFont(ofSize: 9, weight: .regular),
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular),
             .paragraphStyle: paragraphStyle,
             .baselineOffset: -25
         ]
         
         let timeAttributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular),
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .regular),
             .paragraphStyle: paragraphStyle,
-            .baselineOffset: -4
+            .baselineOffset: -6
         ]
         
         let attributedString = NSMutableAttributedString()
