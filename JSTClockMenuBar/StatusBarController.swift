@@ -37,26 +37,25 @@ class StatusBarController: NSObject {
     private func updateStatusItemTitle(date: String, time: String) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-//       paragraphStyle.lineSpacing = -20  // Tighter line spacing
-//        paragraphStyle.paragraphSpacingBefore = 0
-//        paragraphStyle.paragraphSpacing = 0
+        paragraphStyle.lineSpacing = -4
+        paragraphStyle.paragraphSpacingBefore = 0
+        paragraphStyle.paragraphSpacing = 0
+        paragraphStyle.maximumLineHeight = 12
         
         let dateAttributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.monospacedDigitSystemFont(ofSize: 9, weight: .regular),
             .paragraphStyle: paragraphStyle,
-//            .baselineOffset: -25  // Move date down less
-            .baselineOffset: -25  // Move date down less
+            .baselineOffset: -25
         ]
         
         let timeAttributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular),
             .paragraphStyle: paragraphStyle,
-//            .baselineOffset: -8  // Move time up more
+            .baselineOffset: -4
         ]
         
         let attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: date + "\n", attributes: dateAttributes))
-//        attributedString.append(NSAttributedString(string: date, attributes: dateAttributes))
         attributedString.append(NSAttributedString(string: time, attributes: timeAttributes))
         
         statusItem?.button?.attributedTitle = attributedString
@@ -64,7 +63,6 @@ class StatusBarController: NSObject {
     
     private func setupPopover() {
         popover = NSPopover()
-//        popover?.contentSize = NSSize(width: 250, height: 200)
         popover?.contentSize = NSSize(width: 250, height: 50)
         popover?.behavior = .transient
         popover?.contentViewController = NSHostingController(
