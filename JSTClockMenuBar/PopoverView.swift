@@ -11,8 +11,10 @@ struct PopoverView: View {
             
             // Current time display
             Text(clockManager.fullDateTime)
-                .font(.system(.title3, design: .monospaced))
+                .font(.system(.body, design: .monospaced))
                 .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
             
             Divider()
             
